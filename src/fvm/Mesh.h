@@ -9,6 +9,7 @@
 class Mesh {
 public:
     explicit Mesh(char const* meshName);
+    [[nodiscard]] std::vector<Face> const& faces() const;
 private:
     size_t _nNodes{};
     size_t _nFaces{};
