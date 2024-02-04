@@ -22,3 +22,33 @@ TEST_F(SquareOrtho2x2MeshTest, FaceVectorCalculation) {
         }
     }
 }
+
+TEST_F(SquareOrtho2x2MeshTest, BoundaryFaceNeighborCell) {
+    // Boundary faces should not have neighbor cell (neighbor cell index must be -1)
+    for (auto& face: mesh.faces()) {
+        if (face.isBoundary()) {
+            if (face.neighborCellIdx() != -1) {
+                FAIL();
+            }
+        }
+    }
+}
+
+TEST_F(SquareOrtho2x2MeshTest, FaceVectorOrientation) {
+    // The vector of all faces should point away from its owner cell centroid and into its neighbor cell centroid
+    for (auto const& face: mesh.faces()) {
+        Cell const* ownerCell = &mesh.cells()[face.ownerCellIdx()];
+        Cell const* neighborCell = &mesh.cells()[face.neighborCellIdx()];
+        Eigen::Vector2d ownerCentroidToFaceMid = face.mid() - ownerCell->centroid();
+        Eigen::Vector2d neighborCentroidToFaceMid = face.mid() - neighborCell->centroid();
+        if (ownerCentroidToFaceMid.dot(face.vector()) < 0) {
+            FAIL();
+        }
+        // For internal faces, check whether the face vector points into the neighbor cell as well
+        if (!face.isBoundary()) {
+            if (neighborCentroidToFaceMid.dot(face.vector()) > 0) {
+                FAIL();
+            }
+        }
+    }
+}

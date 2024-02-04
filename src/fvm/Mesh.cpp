@@ -40,8 +40,10 @@ Mesh::Mesh(char const* meshName) {
         >> firstFaceAssocCellIdx >> secondFaceAssocCellIdx >> thirdFaceAssocCellIdx;
         _cells.emplace_back(firstNodeIdx-1, secondNodeIdx-1, thirdNodeIdx-1,
                             firstFaceIdx-1, secondFaceIdx-1, thirdFaceIdx-1,
-                            firstFaceAssocCellIdx-1, secondFaceAssocCellIdx-1,
-                            thirdFaceAssocCellIdx-1, _nodes);
+                            (firstFaceAssocCellIdx != -1 ? firstFaceAssocCellIdx-1 : -1),
+                            (secondFaceAssocCellIdx != -1 ? secondFaceAssocCellIdx-1 : -1),
+                            (thirdFaceAssocCellIdx != -1 ? thirdFaceAssocCellIdx-1 : -1),
+                            _nodes);
     }
     meshCellFile.close();
     // Face
@@ -57,8 +59,11 @@ Mesh::Mesh(char const* meshName) {
     for (size_t i = 0; i < _nFaces; i++) {
         int firstNodeIdx, secondNodeIdx, physGroupIdx, ownerCellIdx, neighborCellIdx;
         meshFaceFile >> firstNodeIdx >> secondNodeIdx >> physGroupIdx >> ownerCellIdx >> neighborCellIdx;
-        _faces.emplace_back(firstNodeIdx-1, secondNodeIdx-1, physGroupIdx-1,
-                            ownerCellIdx-1, neighborCellIdx-1, _nodes, _cells);
+        _faces.emplace_back(firstNodeIdx-1, secondNodeIdx-1,
+                            (physGroupIdx != -1 ? physGroupIdx-1 : -1),
+                            ownerCellIdx-1,
+                            (neighborCellIdx != -1 ? neighborCellIdx-1 : -1),
+                            _nodes, _cells);
     }
     meshFaceFile.close();
     std::cout << "Got " << _nNodes << " nodes, " << _nFaces << " faces, and " << _nCells << " cells." << std::endl;
@@ -66,4 +71,8 @@ Mesh::Mesh(char const* meshName) {
 
 std::vector<Face> const& Mesh::faces() const {
     return _faces;
+}
+
+std::vector<Cell> const &Mesh::cells() const {
+    return _cells;
 }
