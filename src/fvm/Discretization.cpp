@@ -61,3 +61,10 @@ Discretization::Discretization(Mesh const& mesh, double rho, double Gamma) {
         }
     }
 }
+
+void Discretization::printLinearSystem() {
+    std::cout << "A:" << std::endl;
+    std::cout << A << std::endl;
+    std::cout << "b:" << std::endl;
+    std::cout << b << std::endl;
+}

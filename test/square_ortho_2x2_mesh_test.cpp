@@ -1,10 +1,12 @@
 #include <gtest/gtest.h>
 #include <Eigen/Dense>
 #include "fvm/Mesh.h"
+#include "fvm/Discretization.h"
 
 class SquareOrtho2x2MeshTest : public testing::Test {
 protected:
     Mesh mesh{"square_ortho_2x2"};
+    Discretization discretization{mesh, 1, 0.01};
 };
 
 TEST_F(SquareOrtho2x2MeshTest, FaceVectorCalculation) {
@@ -51,4 +53,9 @@ TEST_F(SquareOrtho2x2MeshTest, FaceVectorOrientation) {
             }
         }
     }
+}
+
+TEST_F(SquareOrtho2x2MeshTest, Discretization) {
+    // Discretization must be correct
+    discretization.printLinearSystem();
 }
