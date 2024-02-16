@@ -49,5 +49,17 @@ target_link_libraries(
         square_ortho_2x2_mesh_test
         GTest::gtest_main
 )
+add_executable(
+        square_ortho_20x20_mesh_test
+        test/square_ortho_20x20_mesh_test.cpp
+        ${FVM_SOURCE}
+)
+target_link_libraries(
+        square_ortho_20x20_mesh_test
+        GTest::gtest_main
+)
 include(GoogleTest)
-gtest_discover_tests(square_ortho_2x2_mesh_test)
+gtest_discover_tests(
+        square_ortho_2x2_mesh_test
+        square_ortho_20x20_mesh_test
+)

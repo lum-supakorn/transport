@@ -5,7 +5,7 @@
 #include <fvm/Mesh.h>
 
 void writeVTK(std::string const& filePath, std::string const& header,
-              Mesh const& mesh, std::vector<double> const& data, std::string const& dataName) {
+              Mesh const& mesh, Eigen::VectorXd const& data, std::string const& dataName) {
     std::ofstream outputFile(filePath);
     if (!outputFile.is_open()) {
         throw std::runtime_error("Error opening file for writing!");

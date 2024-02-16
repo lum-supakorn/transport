@@ -6,7 +6,7 @@
 
 class SquareOrtho2x2MeshTest : public testing::Test {
 protected:
-    Mesh mesh{"square_ortho_2x2"};
+    Mesh mesh{"square_ortho_20x20"};
     Discretization discretization{mesh, 1, 0.01};
 };
 
@@ -54,9 +54,4 @@ TEST_F(SquareOrtho2x2MeshTest, FaceVectorOrientation) {
             }
         }
     }
-}
-
-TEST_F(SquareOrtho2x2MeshTest, Discretization) {
-    // Discretization must be correct
-    discretization.printLinearSystem();
 }
