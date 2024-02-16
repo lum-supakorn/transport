@@ -30,6 +30,8 @@ set(FVM_SOURCE
         src/fvm/Face.h
         src/fvm/Cell.cpp
         src/fvm/Cell.h
+        src/fvm/Discretization.cpp
+        src/fvm/Discretization.h
 )
 
 add_executable(transport src/main.cpp ${FVM_SOURCE})

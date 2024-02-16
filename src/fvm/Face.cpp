@@ -26,3 +26,7 @@ std::ostream& operator<<(std::ostream &output, Face& face) {
     " owner: " << face._ownerCellIdx << " neighbor: " << face._neighborCellIdx << std::endl;
     return output;
 }
+
+int Face::physGroupIdx() const {
+    return _physGroupIdx;
+}

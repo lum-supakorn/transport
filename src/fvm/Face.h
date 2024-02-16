@@ -30,6 +30,7 @@ public:
     };
     [[nodiscard]] Eigen::Vector2d vector() const;
     [[nodiscard]] Eigen::Vector2d mid() const;
+    [[nodiscard]] int physGroupIdx() const;
     [[nodiscard]] int ownerCellIdx() const;
     [[nodiscard]] int neighborCellIdx() const;
     [[nodiscard]] bool isBoundary() const;
