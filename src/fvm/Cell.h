@@ -19,6 +19,7 @@ public:
     };
     [[nodiscard]] Eigen::Vector2d centroid() const;
     [[nodiscard]] std::vector<int> faceIdx() const;
+    [[nodiscard]] std::vector<int> nodeIdx() const;
     [[nodiscard]] std::vector<int> faceAssocCellIdx() const;
 private:
     std::vector<int> _nodeIdx;

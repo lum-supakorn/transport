@@ -9,6 +9,9 @@
 class Mesh {
 public:
     explicit Mesh(char const* meshName);
+    [[nodiscard]] size_t nNodes() const;
+    [[nodiscard]] size_t nCells() const;
+    [[nodiscard]] std::vector<Node> const& nodes() const;
     [[nodiscard]] std::vector<Face> const& faces() const;
     [[nodiscard]] std::vector<Cell> const& cells() const;
 private:

@@ -32,6 +32,7 @@ set(FVM_SOURCE
         src/fvm/Cell.h
         src/fvm/Discretization.cpp
         src/fvm/Discretization.h
+        src/io/write_vtk.h
 )
 
 add_executable(transport src/main.cpp ${FVM_SOURCE})

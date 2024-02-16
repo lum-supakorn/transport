@@ -2,6 +2,7 @@
 #include <Eigen/Dense>
 #include "fvm/Mesh.h"
 #include "fvm/Discretization.h"
+#include "io/write_vtk.h"
 
 class SquareOrtho2x2MeshTest : public testing::Test {
 protected:
@@ -58,4 +59,9 @@ TEST_F(SquareOrtho2x2MeshTest, FaceVectorOrientation) {
 TEST_F(SquareOrtho2x2MeshTest, Discretization) {
     // Discretization must be correct
     discretization.printLinearSystem();
+}
+
+TEST_F(SquareOrtho2x2MeshTest, WritingData) {
+    std::vector<double> data(mesh.nCells(), 0);
+    writeVTK("data.vtk", "data", mesh, data, "cell_data");
 }

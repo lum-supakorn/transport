@@ -76,3 +76,15 @@ std::vector<Face> const& Mesh::faces() const {
 std::vector<Cell> const &Mesh::cells() const {
     return _cells;
 }
+
+std::vector<Node> const &Mesh::nodes() const {
+    return _nodes;
+}
+
+size_t Mesh::nNodes() const {
+    return _nNodes;
+}
+
+size_t Mesh::nCells() const {
+    return _nCells;
+}
